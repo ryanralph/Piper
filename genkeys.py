@@ -28,7 +28,7 @@ def genKeys():
 
 	keysAreValid = False
 
-	process = Popen(["./vanitygen", "-q", "-t","1","-s", "/dev/random","-X", 00, addrPrefix], stdout=PIPE)
+	process = Popen(["./vanitygen", "-q", "-t","1","-s", "/dev/random","-X", "00", "1RR"], stdout=PIPE)
 
 	results = process.stdout.read()
 	addrs = results.split()
