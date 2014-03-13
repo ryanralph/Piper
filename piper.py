@@ -41,7 +41,7 @@ def print_seed(seed):
 
 def print_keypair(pubkey, privkey, leftBorderText):
 #Specify System Font Location and a font to use
-	fontLocation = "/usr/share/font/fonts/truetype/droid/DroidSansMono.ttf"
+	fontLocation = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 #open the printer itself
 	printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 	printer.begin(200)
