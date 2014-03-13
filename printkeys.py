@@ -17,9 +17,9 @@
 #
 # Piper Copyright (C) 2013  Christopher Cassano
 
-import Image
-import ImageDraw
-import ImageFont
+from PIL import Image
+from PIL import ImageDraw
+from import ImageFont
 import qrcode
 import sys
 from Adafruit_Thermal import *
