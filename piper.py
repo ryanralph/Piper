@@ -40,7 +40,8 @@ def print_seed(seed):
 
 
 def print_keypair(pubkey, privkey, leftBorderText):
-
+#Specify System Font Location and a font to use
+	fontLocation = "/usr/share/font/fonts/truetype/droid/DroidSansMono.ttf"
 #open the printer itself
 	printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 	printer.begin(200)
@@ -81,14 +82,14 @@ def print_keypair(pubkey, privkey, leftBorderText):
 	pubkeyImg = pubkeyImg.resize((175,175), Image.NEAREST)
 
 
-	font = ImageFont.truetype("swansea.ttf", 60)
+	font = ImageFont.truetype(fontLocation, 60)
 	draw = ImageDraw.Draw(finalImg)
 
 	if(printCoinName):
 		draw.text((45, 400), coinName, font=font, fill=(0,0,0))
 
 
-	font = ImageFont.truetype("swansea.ttf", 20)
+	font = ImageFont.truetype(fontLocation, 20)
 	startPos=(110,38)
 	charDist=15
 	lineHeight=23
@@ -187,7 +188,7 @@ def print_keypair(pubkey, privkey, leftBorderText):
 	rightMarkText = "Piperwallet.com"
 
 
-	font = ImageFont.truetype("swansea.ttf", 20)
+	font = ImageFont.truetype(FontLocation, 20)
 
 	rightMarkSize = draw.textsize(rightMarkText, font=font)
 
