@@ -19,7 +19,7 @@
 
 from PIL import Image
 from PIL import ImageDraw
-from import ImageFont
+from PIL import ImageFont
 import qrcode
 import sys
 from Adafruit_Thermal import *
