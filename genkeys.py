@@ -27,12 +27,12 @@ def genKeys():
 	global pubkey, privkey, keysAreValid
 
 	keysAreValid = False
-
-	process = Popen(["./vanitygen", "-q", "-t","1","-s", "/dev/random","-X", "00", "1RR"], stdout=PIPE)
+	#TODO: Try and work out how to make all paper addresses vanity addresses with prefix 1RR
+	process = Popen(["./vanitygen", "-q", "-t","1","-s", "/dev/random","-X", "00"], stdout=PIPE)
 
 	results = process.stdout.read()
 	addrs = results.split()
 	pubkey = addrs[3]
 	privkey = addrs[5]
-	
+
 
