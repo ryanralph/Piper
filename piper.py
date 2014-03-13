@@ -30,7 +30,7 @@ def print_seed(seed):
 
 
 	printer.println(seed)
-	
+
 	printer.feed(3)
 
 
@@ -69,7 +69,7 @@ def print_keypair(pubkey, privkey, leftBorderText):
 		finalImgName += "-enc"
 
 	finalImgName += ".bmp"
-	
+
 	finalImgFolder = "/home/pi/Printer/Images/"
 	finalImg = Image.open(finalImgFolder+finalImgName)
 
@@ -124,7 +124,7 @@ def print_keypair(pubkey, privkey, leftBorderText):
 		for y in range(0, 17):
 			theChar = pubkey[(x*17)+y]
 			charSize = draw.textsize(theChar, font=font)
-			
+
 			#if y is 0 then this is the first run of this loop, and we should use startPos[0] for the x coordinate instead of the lastCharPos
 			if y == 0:
 				draw.text((startPos[0],startPos[1]+(lineHeight*x)),theChar, font=font, fill=(0,0,0))
@@ -201,18 +201,18 @@ def print_keypair(pubkey, privkey, leftBorderText):
 	rightMarkText = "Piperwallet.com"
 
 
-	font = ImageFont.truetype("/usr/share/fonts/ttf/swansea.ttf", 20)
+	font = ImageFont.truetype("swansea.ttf", 20)
 
 	rightMarkSize = draw.textsize(rightMarkText, font=font)
 
 	leftMarkOrigin = (10, 15)
 	rightMarkOrigin = (384-rightMarkSize[0]-10, 15)
 
-	dividerLineImg = Image.open("/home/pi/Printer/dividerline.bmp")
-    
-	draw = ImageDraw.Draw(dividerLineImg)    
-	draw.text(leftMarkOrigin, leftBorderText, font=font, fill=(0,0,0))
-	draw.text(rightMarkOrigin,rightMarkText, font=font, fill=(0,0,0))
+	#dividerLineImg = Image.open("/home/pi/Printer/dividerline.bmp")
+
+#	draw = ImageDraw.Draw(dividerLineImg)
+#	draw.text(leftMarkOrigin, leftBorderText, font=font, fill=(0,0,0))
+#	draw.text(rightMarkOrigin,rightMarkText, font=font, fill=(0,0,0))
 
 
 
@@ -221,19 +221,19 @@ def print_keypair(pubkey, privkey, leftBorderText):
     #do the actual printing
 
 	printer.printImage(finalImg, True)
-	
-	if(len(privkey) <= 51):
-		printer.printChar(privkey[:17]+"\n")
-		printer.justify('R')
-		printer.printChar(privkey[17:34]+"\n")
-		printer.justify('L')
-		printer.printChar(privkey[34:]+"\n")
-	else:
-		printer.println(privkey)
+
+	#if(len(privkey) <= 51):
+#		printer.printChar(privkey[:17]+"\n")
+#		printer.justify('R')
+#		printer.printChar(privkey[17:34]+"\n")
+#		printer.justify('L')
+#		printer.printChar(privkey[34:]+"\n")
+#	else:
+#		printer.println(privkey)
 
 	#print the divider line
-	printer.printImage(dividerLineImg)
-	
+	#printer.printImage(dividerLineImg)
+
 	#print some blank space so we can get a clean tear of the paper
 	printer.feed(3)
 
@@ -244,9 +244,9 @@ def print_keypair(pubkey, privkey, leftBorderText):
 	printer.sleep()      # Tell printer to sleep
 	printer.wake()       # Call wake() before printing again, even if reset
 	printer.setDefault() # Restore printer to defaults
-	
-	
-	
+
+
+
 
 
 def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
@@ -265,15 +265,15 @@ def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
 	import genkeys as btckeys
 
 	btckeys.genKeys()
-		
+
 	import wallet_enc as WalletEnc
 	#encrypt the keys if needed
 	if(password != ""):
 		privkey = WalletEnc.pw_encode(btckeys.pubkey, btckeys.privkey, password)
 	else:
 		privkey = btckeys.privkey
-	
-	
+
+
 	rememberKeys = False
 	sqlitePubKey = ""
 	sqlitePrivKey = ""
@@ -302,8 +302,8 @@ def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
 			if con:
 				con.commit()
 				con.close()
-			
-		
+
+
 		#store it in a flat file on the sd card
 		f = open("/boot/keys.txt", 'a+')
 		strToWrite = "Serial Number: " + snum + strToWrite
@@ -319,7 +319,7 @@ def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
 
 		#piper.print_keypair(pubkey, privkey, leftBorderText)
 		print_keypair(btckeys.pubkey, privkey, leftMarkText)
-		
+
 
 
 
