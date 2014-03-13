@@ -43,6 +43,7 @@ def print_keypair(pubkey, privkey, leftBorderText):
 
 #open the printer itself
 	printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
+	printer.begin(200)
 	finalImgName = "btc"
 	coinName = "btc"
 	printCoinName = (finalImgName == "blank")
@@ -243,7 +244,7 @@ def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
 
 	#open the printer itself
 	printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
-
+	printer.begin(200)
 
 
 	#this actually generates the keys.  see the file genkeys.py or genkeys_forget.py
