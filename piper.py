@@ -44,22 +44,6 @@ def print_keypair(pubkey, privkey, leftBorderText):
 #open the printer itself
 	printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
 
-#check the cointype to decide which background to use
-	con = None
-	try:
-		con = sqlite3.connect('/home/pi/Printer/settings.db3')
-		cur = con.cursor()
-		cur.execute("SELECT CoinFormats.bgfile, CoinFormats.name FROM Settings, CoinFormats WHERE Settings.key='cointype' and Settings.value = CoinFormats.name;")
-		row = cur.fetchone()
-		finalImgName = row[0]
-		coinName = row[1]
-	except sqlite3.Error, e:
-		print("Error %s:" % e.args[0])
-		sys.exit(1)
-	finally:
-		if con:
-			con.commit()
-			con.close()
 	printCoinName = (finalImgName == "blank")
 
 	finalImgName += "-wallet"
@@ -69,7 +53,7 @@ def print_keypair(pubkey, privkey, leftBorderText):
 
 	finalImgName += ".bmp"
 
-	finalImgFolder = "/home/pi/Printer/Images/"
+	finalImgFolder = "Images/"
 	finalImg = Image.open(finalImgFolder+finalImgName)
 
 
@@ -94,14 +78,14 @@ def print_keypair(pubkey, privkey, leftBorderText):
 	pubkeyImg = pubkeyImg.resize((175,175), Image.NEAREST)
 
 
-	font = ImageFont.truetype("/usr/share/fonts/ttf/swansea.ttf", 60)
+	font = ImageFont.truetype("swansea.ttf", 60)
 	draw = ImageDraw.Draw(finalImg)
 
 	if(printCoinName):
 		draw.text((45, 400), coinName, font=font, fill=(0,0,0))
 
 
-	font = ImageFont.truetype("/usr/share/fonts/ttf/ubuntu-font-family-0.80/UbuntuMono-R.ttf", 20)
+	font = ImageFont.truetype("swansea.ttf", 20)
 	startPos=(110,38)
 	charDist=15
 	lineHeight=23
@@ -289,22 +273,8 @@ def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
 
 
 	if rememberKeys == True:
-		#store it to the sqlite db
-		con = None
-		try:
-			con = sqlite3.connect('/home/pi/Printer/keys.db3')
-		        con.execute("INSERT INTO keys (serialnum, public, private) VALUES (?,?,?)", (snum, sqlitePubKey, sqlitePrivKey))
-		except sqlite3.Error, e:
-			print "Error %s:" % e.args[0]
-			sys.exit(1)
-		finally:
-			if con:
-				con.commit()
-				con.close()
-
-
 		#store it in a flat file on the sd card
-		f = open("/boot/keys.txt", 'a+')
+		f = open("keys.txt", 'a+')
 		strToWrite = "Serial Number: " + snum + strToWrite
 		f.write(strToWrite);
 		f.write("\n---------------------------------\n")
