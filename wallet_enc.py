@@ -5,8 +5,6 @@
 import base64
 import hashlib
 import aes
-import sqlite3
-import serializeBTC as ser
 import Crypto.Cipher.AES as AES
 import Crypto.Hash.SHA256 as SHA256
 import scrypt
@@ -38,15 +36,15 @@ def encryptBIP0038(pubkey, privkey, secret):
 	k.generate(decoded)
 	k.set_compressed(False)
 	b = Bip38(k, secret)
-	return str(CBase58Data(b.get_encrypted(), 0x01))       
-	
+	return str(CBase58Data(b.get_encrypted(), 0x01))
+
 
 def pw_encode(pub, priv, password):
     if password:
 
         secret = Hash(password)
 	con = None
-	encType = ""	
+	encType = ""
 	try:
 		con = sqlite3.connect('/home/pi/Printer/settings.db3')
 		cur = con.cursor()
@@ -65,7 +63,7 @@ def pw_encode(pub, priv, password):
         	return EncodeAES(secret, priv)
 	elif encType == "bip0038":
 		#do not pass in secret, pass in password, because the BIP0038 spec doesn't specify that you should hash passwords first in this way like with AES
-		return encryptBIP0038(pub, priv, password) 
+		return encryptBIP0038(pub, priv, password)
     else:
         return priv
 
@@ -128,7 +126,7 @@ def b58decode(v):
         else: break
 
     result = chr(0)*nPad + result
-    
+
     return result
 
 
