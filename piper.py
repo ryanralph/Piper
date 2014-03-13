@@ -26,7 +26,7 @@ from Adafruit_Thermal import *
 def print_seed(seed):
 
 	printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
-
+	printer.begin(200)
 
 	printer.println(seed)
 
