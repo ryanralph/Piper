@@ -185,15 +185,15 @@ def print_keypair(pubkey, privkey, leftBorderText):
 
 
 #create the divider
-	rightMarkText = "Piperwallet.com"
+	#rightMarkText = "Piperwallet.com"
 
 
-	font = ImageFont.truetype(FontLocation, 20)
+	#font = ImageFont.truetype(FontLocation, 20)
 
-	rightMarkSize = draw.textsize(rightMarkText, font=font)
+#	rightMarkSize = draw.textsize(rightMarkText, font=font)
 
-	leftMarkOrigin = (10, 15)
-	rightMarkOrigin = (384-rightMarkSize[0]-10, 15)
+#	leftMarkOrigin = (10, 15)
+#	rightMarkOrigin = (384-rightMarkSize[0]-10, 15)
 
 	#dividerLineImg = Image.open("/home/pi/Printer/dividerline.bmp")
 
