@@ -51,7 +51,8 @@ def print_keypair(pubkey, privkey, leftBorderText):
 #load a blank image of the paper wallet with no QR codes or keys on it which we will draw on
 	if(len(privkey) > 51):
 		finalImgName += "-enc"
-
+	else:
+		finalImgName += "-blank"
 	finalImgName += ".bmp"
 
 	finalImgFolder = "Images/"
