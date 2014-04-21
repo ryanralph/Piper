@@ -39,7 +39,7 @@ def print_seed(seed):
 
 
 
-def print_keypair(pubkey, privkey, leftBorderText):
+def print_keypair(pubkey, privkey):
 #Specify System Font Location and a font to use
 	fontLocation = "/usr/share/fonts/truetype/droid/DroidSansMono.ttf"
 #open the printer itself
@@ -257,13 +257,12 @@ def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
 		f.close()
 
 
-	leftMarkText = ""
 
 	#do the actual printing
 	for x in range(0, numCopies):
 
 		#piper.print_keypair(pubkey, privkey, leftBorderText)
-		print_keypair(btckeys.pubkey, privkey, leftMarkText)
+		print_keypair(btckeys.pubkey, privkey)
 
 
 
