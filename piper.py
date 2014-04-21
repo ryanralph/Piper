@@ -270,6 +270,6 @@ def genAndPrintKeys(remPubKey, remPrivKey, numCopies, password):
 
 
 	#update serial number
-	snumfile.seek(0,0)
-	snumfile.write(str(int(snum)+1))
-	snumfile.close()
+	#snumfile.seek(0,0)
+	#snumfile.write(str(int(snum)+1))
+	#snumfile.close()
